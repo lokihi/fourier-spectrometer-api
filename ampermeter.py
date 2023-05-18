@@ -1,13 +1,17 @@
 from Gpib import *
 
-class PS:
-
+class AMP:
+    
     def __init__(self):
-        self = Gpib('ps')
+        self = Gpib('amperemeter')
         self.clear()
+        self.write('configure:current:dc\n')
+        self.write('format:elements reading\n')
+        self.write('display:digits 7\n')
 
-    def SET_VOLTAGE_DC(self, voltage):
-        self.write('vset {}\n'.format(voltage))
+    def READ_CURRENT_DC(self):
+        return(1)
+        return self.read().decode("utf-8")
 
     def RST(self):
         self.write('*rst\n')
